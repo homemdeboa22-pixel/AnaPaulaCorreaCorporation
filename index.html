@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ana Paula Correa Corporations - Impressão Personalizada</title>
+    <title>Ana Paula Artes e Sublimações - Impressão Personalizada</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap');
         
@@ -447,22 +447,159 @@
             margin-top: 10px;
         }
 
+        /* Modal/Lightbox para visualização de imagens */
+        .image-modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            animation: fadeIn 0.3s;
+            cursor: pointer;
+        }
+
+        .image-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .image-modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            animation: zoomIn 0.3s;
+            cursor: default;
+        }
+
+        .image-modal-content img {
+            max-width: 100%;
+            max-height: 90vh;
+            border-radius: 10px;
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Animações para imagens da galeria */
+        .gallery-item {
+            animation: slideInUp 0.5s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .gallery-item:nth-child(1) { animation-delay: 0.1s; }
+        .gallery-item:nth-child(2) { animation-delay: 0.2s; }
+        .gallery-item:nth-child(3) { animation-delay: 0.3s; }
+        .gallery-item:nth-child(4) { animation-delay: 0.4s; }
+        .gallery-item:nth-child(5) { animation-delay: 0.5s; }
+        .gallery-item:nth-child(6) { animation-delay: 0.6s; }
+        .gallery-item:nth-child(n+7) { animation-delay: 0.7s; }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Cursor pointer para imagens clicáveis */
+        .gallery-item img {
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Responsive - Mobile */
         @media (max-width: 768px) {
             .hero h1 {
-                font-size: 2em;
+                font-size: 1.8em;
             }
 
             .gallery {
                 grid-template-columns: 1fr;
+                gap: 15px;
             }
 
             .header-content {
                 flex-direction: column;
                 text-align: center;
+                padding: 15px 0;
+            }
+
+            .logo {
+                font-size: 1.5em;
             }
 
             .contact-info {
                 justify-content: center;
+                flex-direction: column;
+                gap: 10px;
+                width: 100%;
+            }
+
+            .nav-buttons {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .nav-btn {
+                width: 100%;
+                padding: 12px;
+            }
+
+            .container {
+                padding: 10px;
+            }
+
+            .section h2 {
+                font-size: 1.8em;
+            }
+
+            .gallery-item img {
+                height: 250px;
+            }
+
+            .image-modal-content {
+                max-width: 95%;
+                max-height: 85%;
+            }
+
+            .add-image-form {
+                padding: 20px;
+            }
+        }
+
+        /* Detecção de dispositivo móvel */
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.5em;
+            }
+
+            .section h2 {
+                font-size: 1.5em;
+            }
+
+            .gallery-item img {
+                height: 200px;
             }
         }
     </style>
@@ -471,9 +608,9 @@
     <header>
         <div class="container">
             <div class="header-content">
-                <a href="#" class="logo" onclick="showSection('home'); return false;">Ana Paula Correa Corporations</a>
+                <a href="#" class="logo" onclick="showSection('home'); return false;">Ana Paula Artes e Sublimações</a>
                 <div class="contact-info">
-                    <a href="tel:21977435581" class="contact-item">
+                    <a href="https://wa.me/5521977435581" target="_blank" class="contact-item">
                         <span>📞</span>
                         <span>21 97743-5581</span>
                     </a>
@@ -493,6 +630,7 @@
             <div class="nav-buttons">
                 <button class="nav-btn active" onclick="showSection('home')">Início</button>
                 <button class="nav-btn" onclick="showSection('camisas')">Camisas</button>
+                <button class="nav-btn" onclick="showSection('camisas-dtf')">Camisas DTF</button>
                 <button class="nav-btn" onclick="showSection('canecas')">Canecas</button>
             </div>
         </div>
@@ -501,7 +639,7 @@
     <div class="container">
         <section id="home" class="section active">
             <div class="hero">
-                <h1>Ana Paula Correa Corporations</h1>
+                <h1>Ana Paula Artes e Sublimações</h1>
                 <p>Impressão Personalizada de Alta Qualidade</p>
                 <p style="font-size: 1.1em; margin-top: 20px;">
                     Transforme suas ideias em realidade com nossos serviços de impressão em camisas e canecas
@@ -513,6 +651,11 @@
                     <h3 style="color: var(--primary-color); font-size: 2em; margin-bottom: 15px;">Camisas</h3>
                     <p style="color: #666; margin-bottom: 20px;">Estampas personalizadas de alta qualidade em qualquer tipo de camisa</p>
                     <button class="btn" onclick="showSection('camisas')">Ver Galeria</button>
+                </div>
+                <div style="background: white; padding: 40px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); text-align: center;">
+                    <h3 style="color: var(--primary-color); font-size: 2em; margin-bottom: 15px;">Camisas DTF</h3>
+                    <p style="color: #666; margin-bottom: 20px;">Tecnologia DTF para estampas de alta qualidade e durabilidade</p>
+                    <button class="btn" onclick="showSection('camisas-dtf')">Ver Galeria</button>
                 </div>
                 <div style="background: white; padding: 40px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); text-align: center;">
                     <h3 style="color: var(--primary-color); font-size: 2em; margin-bottom: 15px;">Canecas</h3>
@@ -669,6 +812,87 @@
             </div>
             <div id="canecasGallery" class="gallery"></div>
         </section>
+
+        <section id="camisas-dtf" class="section">
+            <h2>Camisas DTF</h2>
+            <div id="addCamisaDtfBtnContainer" style="margin-bottom: 20px; display: none;">
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <button class="btn" onclick="toggleAddForm('camisas-dtf')">Adicionar Nova Imagem</button>
+                    <button class="btn btn-secondary" onclick="openImgurLinkForm('camisas-dtf')" style="background: #1bb76e; border-color: #1bb76e;">🔗 Adicionar Link Imgur</button>
+                </div>
+            </div>
+            <div id="camisasDtfSyncSection" class="sync-section">
+                <h3 style="margin-bottom: 15px; color: var(--primary-color);">Sincronização de Dados</h3>
+                <p style="margin-bottom: 15px; color: #666;">Para compartilhar as imagens com todos, exporte os dados e faça upload em um serviço de armazenamento online (Google Drive, Dropbox, etc.) e compartilhe o link</p>
+                <div class="sync-buttons">
+                    <button class="btn" onclick="exportData('camisas-dtf')">📥 Exportar Dados JSON</button>
+                    <button class="btn btn-secondary" onclick="document.getElementById('camisasDtfImportInput').click()">📤 Importar Dados JSON</button>
+                    <input type="file" id="camisasDtfImportInput" accept=".json" style="display: none;" onchange="importData('camisas-dtf', this)">
+                </div>
+                <div style="margin-top: 15px; padding: 15px; background: rgba(211, 47, 47, 0.1); border-radius: 8px; border-left: 4px solid var(--primary-color);">
+                    <p style="margin: 0; color: #666; font-size: 0.9em;"><strong>💡 Dica:</strong> Para que todos vejam as imagens, faça upload do arquivo JSON exportado em um serviço de armazenamento online e compartilhe o link público. Depois, qualquer pessoa pode importar os dados usando o link.</p>
+                </div>
+            </div>
+            <div id="addCamisaDtfForm" class="add-image-form">
+                <h3 style="margin-bottom: 20px; color: var(--primary-color);">Adicionar Nova Camisa DTF</h3>
+                <div class="form-group">
+                    <label>Escolha uma opção:</label>
+                    <select id="camisaDtfImageType" onchange="toggleImageInput('camisas-dtf')">
+                        <option value="imgur-upload">📤 Upload para Imgur (Recomendado)</option>
+                        <option value="imgur-link">🔗 Adicionar Link do Imgur</option>
+                        <option value="url">🌐 URL da Imagem (Outro serviço)</option>
+                        <option value="upload">💾 Upload Local (Apenas este navegador)</option>
+                    </select>
+                </div>
+                <div class="form-group" id="camisaDtfImgurUploadInput">
+                    <label for="camisaDtfImageImgur">Selecionar Imagem para Upload no Imgur:</label>
+                    <input type="file" id="camisaDtfImageImgur" accept="image/*" onchange="previewImage('camisas-dtf', this, 'imgur')">
+                    <div id="camisaDtfImgurPreview" style="margin-top: 10px;"></div>
+                    <div id="camisaDtfImgurStatus" style="margin-top: 10px;"></div>
+                    <button type="button" class="btn" id="camisaDtfUploadImgurBtn" onclick="uploadToImgur('camisas-dtf')" style="margin-top: 10px; display: none;">📤 Fazer Upload para Imgur</button>
+                    <div style="margin-top: 15px; padding: 15px; background: rgba(76, 175, 80, 0.1); border-radius: 8px; border-left: 4px solid #4caf50;">
+                        <p style="margin: 0; color: #666; font-size: 0.9em;"><strong>✅ Vantagem:</strong> As imagens enviadas para o Imgur ficam disponíveis para todos os visitantes do site!</p>
+                    </div>
+                </div>
+                <div class="form-group" id="camisaDtfImgurLinkInput" style="display: none;">
+                    <label for="camisaDtfImageImgurLink">Cole o link do Imgur aqui:</label>
+                    <input type="url" id="camisaDtfImageImgurLink" placeholder="https://i.imgur.com/xxxxx.jpg ou https://imgur.com/xxxxx" oninput="previewImgurLink('camisas-dtf', this.value)">
+                    <div id="camisaDtfImgurLinkPreview" style="margin-top: 10px;"></div>
+                    <div style="margin-top: 10px; padding: 10px; background: rgba(211, 47, 47, 0.1); border-radius: 8px;">
+                        <p style="margin: 0; color: #666; font-size: 0.85em;">💡 <strong>Como obter o link:</strong> Faça upload no <a href="https://imgur.com/upload" target="_blank" style="color: var(--primary-color);">Imgur.com</a>, depois clique com botão direito na imagem e "Copiar endereço da imagem" ou use o link direto (i.imgur.com/xxxxx.jpg)</p>
+                    </div>
+                </div>
+                <div class="form-group" id="camisaDtfUrlInput" style="display: none;">
+                    <label for="camisaDtfImageUrl">URL da Imagem (outro serviço):</label>
+                    <input type="url" id="camisaDtfImageUrl" placeholder="https://exemplo.com/imagem.jpg">
+                </div>
+                <div class="form-group" id="camisaDtfUploadInput" style="display: none;">
+                    <label for="camisaDtfImageUpload">Selecionar Imagem:</label>
+                    <input type="file" id="camisaDtfImageUpload" accept="image/*" onchange="previewImage('camisas-dtf', this)">
+                    <div id="camisaDtfPreview" style="margin-top: 10px;"></div>
+                </div>
+                <div class="form-group">
+                    <label for="camisaDtfDescription">Descrição (opcional):</label>
+                    <input type="text" id="camisaDtfDescription" placeholder="Ex: Camisa DTF com estampa personalizada">
+                </div>
+                <button class="btn" onclick="addImage('camisas-dtf')" id="camisaDtfAddBtn">Adicionar Imagem</button>
+                <button class="btn btn-secondary" onclick="toggleAddForm('camisas-dtf')" style="margin-left: 10px;">Cancelar</button>
+            </div>
+            <div class="drop-zone" id="camisasDtfDropZone" style="display: none;">
+                <p style="font-size: 3em; margin-bottom: 10px;">📤</p>
+                <p><strong>Arraste e solte imagens aqui</strong></p>
+                <p style="font-size: 0.9em; margin-top: 5px;">ou clique para selecionar arquivos</p>
+                <p style="font-size: 0.8em; color: #999; margin-top: 10px;">Você pode arrastar múltiplas imagens de uma vez</p>
+            </div>
+            <div id="camisas-dtfGallery" class="gallery"></div>
+        </section>
+    </div>
+
+    <!-- Modal para visualização de imagens ampliadas -->
+    <div id="imageModal" class="image-modal" onclick="closeImageModal()">
+        <div class="image-modal-content" onclick="event.stopPropagation()">
+            <img id="modalImage" src="" alt="Imagem ampliada">
+        </div>
     </div>
 
     <!-- Modal de Login -->
@@ -729,18 +953,59 @@
             navButtons.forEach(btn => {
                 if (btn.textContent.includes('Início') && sectionId === 'home') {
                     btn.classList.add('active');
-                } else if (btn.textContent.includes('Camisas') && sectionId === 'camisas') {
+                } else if (btn.textContent.includes('Camisas DTF') && sectionId === 'camisas-dtf') {
+                    btn.classList.add('active');
+                } else if (btn.textContent.includes('Camisas') && !btn.textContent.includes('DTF') && sectionId === 'camisas') {
                     btn.classList.add('active');
                 } else if (btn.textContent.includes('Canecas') && sectionId === 'canecas') {
                     btn.classList.add('active');
                 }
             });
 
-            // Carregar galeria
-            if (sectionId === 'camisas' || sectionId === 'canecas') {
+            // Carregar galeria com animação
+            if (sectionId === 'camisas' || sectionId === 'canecas' || sectionId === 'camisas-dtf') {
+                // Resetar animações removendo e readicionando a classe
+                const gallery = document.getElementById(`${sectionId}Gallery`);
+                if (gallery) {
+                    const items = gallery.querySelectorAll('.gallery-item');
+                    items.forEach(item => {
+                        item.style.animation = 'none';
+                        setTimeout(() => {
+                            item.style.animation = '';
+                        }, 10);
+                    });
+                }
                 loadGallery(sectionId);
             }
         }
+
+        // Abrir modal de imagem
+        function openImageModal(imageUrl, imageAlt) {
+            const modal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            if (modal && modalImage) {
+                modalImage.src = imageUrl;
+                modalImage.alt = imageAlt || 'Imagem ampliada';
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevenir scroll
+            }
+        }
+
+        // Fechar modal de imagem
+        function closeImageModal() {
+            const modal = document.getElementById('imageModal');
+            if (modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = ''; // Restaurar scroll
+            }
+        }
+
+        // Fechar modal ao pressionar ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeImageModal();
+            }
+        });
 
         // Abrir modal de login
         function openLoginModal() {
@@ -786,22 +1051,29 @@
         // Mostrar botões de adicionar
         function showAddButtons() {
             document.getElementById('addCamisaBtnContainer').style.display = 'block';
+            document.getElementById('addCamisaDtfBtnContainer').style.display = 'block';
             document.getElementById('addCanecaBtnContainer').style.display = 'block';
             document.getElementById('camisasSyncSection').classList.add('active');
+            document.getElementById('camisasDtfSyncSection').classList.add('active');
             document.getElementById('canecasSyncSection').classList.add('active');
             document.getElementById('camisasDropZone').style.display = 'block';
+            document.getElementById('camisasDtfDropZone').style.display = 'block';
             document.getElementById('canecasDropZone').style.display = 'block';
             setupDragAndDrop('camisas');
+            setupDragAndDrop('camisas-dtf');
             setupDragAndDrop('canecas');
         }
 
         // Esconder botões de adicionar
         function hideAddButtons() {
             document.getElementById('addCamisaBtnContainer').style.display = 'none';
+            document.getElementById('addCamisaDtfBtnContainer').style.display = 'none';
             document.getElementById('addCanecaBtnContainer').style.display = 'none';
             document.getElementById('camisasSyncSection').classList.remove('active');
+            document.getElementById('camisasDtfSyncSection').classList.remove('active');
             document.getElementById('canecasSyncSection').classList.remove('active');
             document.getElementById('camisasDropZone').style.display = 'none';
+            document.getElementById('camisasDtfDropZone').style.display = 'none';
             document.getElementById('canecasDropZone').style.display = 'none';
             document.querySelectorAll('.add-image-form').forEach(form => {
                 form.classList.remove('active');
@@ -894,12 +1166,14 @@
 
         // Exportar dados
         function exportData(section) {
-            // Exportar dados completos (camisas e canecas) em um único arquivo
+            // Exportar dados completos (camisas, camisas-dtf e canecas) em um único arquivo
             const camisasImages = JSON.parse(localStorage.getItem('camisasImages') || '[]');
+            const camisasDtfImages = JSON.parse(localStorage.getItem('camisas-dtfImages') || '[]');
             const canecasImages = JSON.parse(localStorage.getItem('canecasImages') || '[]');
             
             const allData = {
                 camisas: camisasImages,
+                'camisas-dtf': camisasDtfImages,
                 canecas: canecasImages,
                 lastUpdate: new Date().toISOString()
             };
@@ -1031,6 +1305,18 @@
                         }
                     }
                     
+                    // Carregar dados de camisas-dtf se existirem
+                    if (data['camisas-dtf'] && Array.isArray(data['camisas-dtf'])) {
+                        localStorage.setItem('camisas-dtfImages', JSON.stringify(data['camisas-dtf']));
+                        loadGallery('camisas-dtf');
+                        if (data['camisas-dtf'].length > 0) {
+                            console.log('✅ Dados de camisas-dtf carregados do GitHub:', data['camisas-dtf'].length, 'imagens');
+                            loadedAny = true;
+                        } else {
+                            console.log('ℹ️ Array de camisas-dtf vazio no GitHub');
+                        }
+                    }
+                    
                     // Carregar dados de canecas se existirem (sempre sobrescrever, mesmo se vazio)
                     if (data.canecas && Array.isArray(data.canecas)) {
                         localStorage.setItem('canecasImages', JSON.stringify(data.canecas));
@@ -1059,6 +1345,7 @@
             // Mapear seção para ID correto do formulário
             const formIdMap = {
                 'camisas': 'addCamisaForm',
+                'camisas-dtf': 'addCamisaDtfForm',
                 'canecas': 'addCanecaForm'
             };
             
@@ -1096,6 +1383,7 @@
             // Mapear seção para ID correto (singular)
             const previewIdMap = {
                 'camisas': 'camisaImgurLinkPreview',
+                'camisas-dtf': 'camisaDtfImgurLinkPreview',
                 'canecas': 'canecaImgurLinkPreview'
             };
             
@@ -1179,6 +1467,16 @@
                     url: 'camisaUrlInput',
                     upload: 'camisaUploadInput'
                 },
+                'camisas-dtf': {
+                    form: 'addCamisaDtfForm',
+                    prefix: 'camisaDtf',
+                    select: 'camisaDtfImageType',
+                    imgurLinkContainer: 'camisaDtfImgurLinkInput',
+                    imgurLinkInput: 'camisaDtfImageImgurLink',
+                    imgurUpload: 'camisaDtfImgurUploadInput',
+                    url: 'camisaDtfUrlInput',
+                    upload: 'camisaDtfUploadInput'
+                },
                 'canecas': {
                     form: 'addCanecaForm',
                     prefix: 'caneca',
@@ -1256,6 +1554,17 @@
                     imgurPreview: 'camisaImgurPreview',
                     imgurStatus: 'camisaImgurStatus',
                     addBtn: 'camisaAddBtn'
+                },
+                'camisas-dtf': {
+                    imageType: 'camisaDtfImageType',
+                    imgurUpload: 'camisaDtfImgurUploadInput',
+                    imgurLink: 'camisaDtfImgurLinkInput',
+                    url: 'camisaDtfUrlInput',
+                    upload: 'camisaDtfUploadInput',
+                    preview: 'camisaDtfPreview',
+                    imgurPreview: 'camisaDtfImgurPreview',
+                    imgurStatus: 'camisaDtfImgurStatus',
+                    addBtn: 'camisaDtfAddBtn'
                 },
                 'canecas': {
                     imageType: 'canecaImageType',
@@ -1490,6 +1799,14 @@
                     imageUrl: 'camisaImageUrl',
                     imageUpload: 'camisaImageUpload'
                 },
+                'camisas-dtf': {
+                    prefix: 'camisaDtf',
+                    imageType: 'camisaDtfImageType',
+                    description: 'camisaDtfDescription',
+                    imgurLink: 'camisaDtfImageImgurLink',
+                    imageUrl: 'camisaDtfImageUrl',
+                    imageUpload: 'camisaDtfImageUpload'
+                },
                 'canecas': {
                     prefix: 'caneca',
                     imageType: 'canecaImageType',
@@ -1675,6 +1992,15 @@
                     imgurLinkPreview: 'camisaImgurLinkPreview',
                     imageType: 'camisaImageType'
                 },
+                'camisas-dtf': {
+                    url: 'camisaDtfImageUrl',
+                    upload: 'camisaDtfImageUpload',
+                    imgurLink: 'camisaDtfImageImgurLink',
+                    description: 'camisaDtfDescription',
+                    preview: 'camisaDtfPreview',
+                    imgurLinkPreview: 'camisaDtfImgurLinkPreview',
+                    imageType: 'camisaDtfImageType'
+                },
                 'canecas': {
                     url: 'canecaImageUrl',
                     upload: 'canecaImageUpload',
@@ -1711,6 +2037,7 @@
             // Fechar formulário
             const formIdMap = {
                 'camisas': 'addCamisaForm',
+                'camisas-dtf': 'addCamisaDtfForm',
                 'canecas': 'addCanecaForm'
             };
             const formId = formIdMap[section];
@@ -1750,6 +2077,7 @@
             gallery.innerHTML = images.map((image, index) => `
                 <div class="gallery-item">
                     <img src="${image.url}" alt="${image.description || 'Imagem ' + (index + 1)}" 
+                         onclick="openImageModal('${image.url}', '${(image.description || 'Imagem ' + (index + 1)).replace(/'/g, "\\'")}')"
                          onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'300\' height=\'300\'%3E%3Crect fill=\'%23ddd\' width=\'300\' height=\'300\'/%3E%3Ctext fill=\'%23999\' font-family=\'sans-serif\' font-size=\'14\' dy=\'10.5\' font-weight=\'bold\' x=\'50%25\' y=\'50%25\' text-anchor=\'middle\'%3EImagem não encontrada%3C/text%3E%3C/svg%3E'">
                     ${image.description ? `<div style="padding: 15px; background: white; border-top: 1px solid #eee;"><p style="margin: 0; color: #666; font-size: 0.9em;">${image.description}</p></div>` : ''}
                     ${isLoggedIn ? `<button class="delete-btn" onclick="deleteImage('${section}', ${image.id})" title="Excluir">×</button>` : ''}
@@ -1832,11 +2160,13 @@
             
             // Sempre carregar galerias após tentar carregar dados
             loadGallery('camisas');
+            loadGallery('camisas-dtf');
             loadGallery('canecas');
             
             // Configurar drag and drop se estiver logado
             if (localStorage.getItem('adminLoggedIn') === 'true') {
                 setupDragAndDrop('camisas');
+                setupDragAndDrop('camisas-dtf');
                 setupDragAndDrop('canecas');
             }
         });
@@ -1858,6 +2188,8 @@
         window.exportData = exportData;
         window.importData = importData;
         window.setupDragAndDrop = setupDragAndDrop;
+        window.openImageModal = openImageModal;
+        window.closeImageModal = closeImageModal;
         
         // Garantir que as funções estejam disponíveis imediatamente
         console.log('Funções expostas:', {
