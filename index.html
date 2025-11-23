@@ -894,16 +894,25 @@
 
         // Exportar dados
         function exportData(section) {
-            const images = JSON.parse(localStorage.getItem(`${section}Images`) || '[]');
-            const dataStr = JSON.stringify(images, null, 2);
+            // Exportar dados completos (camisas e canecas) em um único arquivo
+            const camisasImages = JSON.parse(localStorage.getItem('camisasImages') || '[]');
+            const canecasImages = JSON.parse(localStorage.getItem('canecasImages') || '[]');
+            
+            const allData = {
+                camisas: camisasImages,
+                canecas: canecasImages,
+                lastUpdate: new Date().toISOString()
+            };
+            
+            const dataStr = JSON.stringify(allData, null, 2);
             const dataBlob = new Blob([dataStr], { type: 'application/json' });
             const url = URL.createObjectURL(dataBlob);
             const link = document.createElement('a');
             link.href = url;
-            link.download = `${section}_dados.json`;
+            link.download = 'dados.json';
             link.click();
             URL.revokeObjectURL(url);
-            alert('Dados exportados com sucesso!');
+            alert('Dados exportados com sucesso!\n\n📋 INSTRUÇÕES:\n1. Faça upload do arquivo "dados.json" na raiz do seu repositório GitHub\n2. As imagens aparecerão automaticamente para todos os visitantes!');
         }
 
         // Importar dados
@@ -979,6 +988,48 @@
                         }
                     })
                     .catch(error => console.error('Erro ao carregar dados de canecas:', error));
+            }
+        }
+
+        // Carregar dados automaticamente do GitHub Pages
+        async function loadDataFromGitHub() {
+            // URL base do repositório GitHub Pages
+            const baseUrl = window.location.origin;
+            const dadosUrl = `${baseUrl}/dados.json`;
+            
+            try {
+                const response = await fetch(dadosUrl, { 
+                    cache: 'no-cache',
+                    headers: {
+                        'Cache-Control': 'no-cache'
+                    }
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    
+                    // Carregar dados de camisas se existirem
+                    if (data.camisas && Array.isArray(data.camisas) && data.camisas.length > 0) {
+                        localStorage.setItem('camisasImages', JSON.stringify(data.camisas));
+                        loadGallery('camisas');
+                        console.log('✅ Dados de camisas carregados do GitHub:', data.camisas.length, 'imagens');
+                    }
+                    
+                    // Carregar dados de canecas se existirem
+                    if (data.canecas && Array.isArray(data.canecas) && data.canecas.length > 0) {
+                        localStorage.setItem('canecasImages', JSON.stringify(data.canecas));
+                        loadGallery('canecas');
+                        console.log('✅ Dados de canecas carregados do GitHub:', data.canecas.length, 'imagens');
+                    }
+                    
+                    return true;
+                } else {
+                    console.log('ℹ️ Arquivo dados.json não encontrado no GitHub. Usando dados locais se existirem.');
+                    return false;
+                }
+            } catch (error) {
+                console.log('ℹ️ Não foi possível carregar dados.json do GitHub. Usando dados locais se existirem.');
+                return false;
             }
         }
 
@@ -1740,11 +1791,15 @@
             initializeDefaultImages();
             checkAuth();
             
-            // Tentar carregar dados compartilhados da URL
+            // Tentar carregar dados compartilhados da URL primeiro
             tryLoadSharedData();
             
-            loadGallery('camisas');
-            loadGallery('canecas');
+            // Carregar dados automaticamente do GitHub Pages
+            loadDataFromGitHub().then(() => {
+                // Depois de tentar carregar do GitHub, carregar galerias
+                loadGallery('camisas');
+                loadGallery('canecas');
+            });
             
             // Configurar drag and drop se estiver logado
             if (localStorage.getItem('adminLoggedIn') === 'true') {
