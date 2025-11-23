@@ -993,9 +993,19 @@
 
         // Carregar dados automaticamente do GitHub Pages
         async function loadDataFromGitHub() {
-            // URL base do repositório GitHub Pages
-            const baseUrl = window.location.origin;
-            const dadosUrl = `${baseUrl}/dados.json`;
+            // URL base do repositório GitHub Pages (incluindo o caminho do repositório)
+            // Se estiver na raiz, usar origin, senão usar origin + pathname
+            let basePath = window.location.pathname;
+            // Remover o nome do arquivo se houver (ex: /index.html)
+            if (basePath.endsWith('.html') || basePath.endsWith('/')) {
+                basePath = basePath.substring(0, basePath.lastIndexOf('/'));
+            }
+            // Garantir que comece com /
+            if (!basePath.startsWith('/')) {
+                basePath = '/' + basePath;
+            }
+            const dadosUrl = window.location.origin + basePath + '/dados.json';
+            console.log('🔍 Tentando carregar dados.json de:', dadosUrl);
             
             try {
                 const response = await fetch(dadosUrl, { 
@@ -1007,22 +1017,33 @@
                 
                 if (response.ok) {
                     const data = await response.json();
+                    let loadedAny = false;
                     
-                    // Carregar dados de camisas se existirem
-                    if (data.camisas && Array.isArray(data.camisas) && data.camisas.length > 0) {
+                    // Carregar dados de camisas se existirem (sempre sobrescrever, mesmo se vazio)
+                    if (data.camisas && Array.isArray(data.camisas)) {
                         localStorage.setItem('camisasImages', JSON.stringify(data.camisas));
                         loadGallery('camisas');
-                        console.log('✅ Dados de camisas carregados do GitHub:', data.camisas.length, 'imagens');
+                        if (data.camisas.length > 0) {
+                            console.log('✅ Dados de camisas carregados do GitHub:', data.camisas.length, 'imagens');
+                            loadedAny = true;
+                        } else {
+                            console.log('ℹ️ Array de camisas vazio no GitHub');
+                        }
                     }
                     
-                    // Carregar dados de canecas se existirem
-                    if (data.canecas && Array.isArray(data.canecas) && data.canecas.length > 0) {
+                    // Carregar dados de canecas se existirem (sempre sobrescrever, mesmo se vazio)
+                    if (data.canecas && Array.isArray(data.canecas)) {
                         localStorage.setItem('canecasImages', JSON.stringify(data.canecas));
                         loadGallery('canecas');
-                        console.log('✅ Dados de canecas carregados do GitHub:', data.canecas.length, 'imagens');
+                        if (data.canecas.length > 0) {
+                            console.log('✅ Dados de canecas carregados do GitHub:', data.canecas.length, 'imagens');
+                            loadedAny = true;
+                        } else {
+                            console.log('ℹ️ Array de canecas vazio no GitHub');
+                        }
                     }
                     
-                    return true;
+                    return loadedAny;
                 } else {
                     console.log('ℹ️ Arquivo dados.json não encontrado no GitHub. Usando dados locais se existirem.');
                     return false;
@@ -1787,19 +1808,31 @@
         }
 
         // Inicializar
-        document.addEventListener('DOMContentLoaded', () => {
-            initializeDefaultImages();
+        document.addEventListener('DOMContentLoaded', async () => {
             checkAuth();
             
             // Tentar carregar dados compartilhados da URL primeiro
             tryLoadSharedData();
             
-            // Carregar dados automaticamente do GitHub Pages
-            loadDataFromGitHub().then(() => {
-                // Depois de tentar carregar do GitHub, carregar galerias
-                loadGallery('camisas');
-                loadGallery('canecas');
-            });
+            // Carregar dados automaticamente do GitHub Pages (prioridade máxima)
+            try {
+                const loaded = await loadDataFromGitHub();
+                if (!loaded) {
+                    // Se não conseguiu carregar do GitHub, usar dados locais ou padrão
+                    console.log('ℹ️ Não foi possível carregar do GitHub. Verificando dados locais...');
+                    initializeDefaultImages();
+                } else {
+                    console.log('✅ Dados carregados do GitHub com sucesso!');
+                }
+            } catch (error) {
+                console.error('❌ Erro ao carregar dados do GitHub:', error);
+                // Em caso de erro, usar dados locais ou padrão
+                initializeDefaultImages();
+            }
+            
+            // Sempre carregar galerias após tentar carregar dados
+            loadGallery('camisas');
+            loadGallery('canecas');
             
             // Configurar drag and drop se estiver logado
             if (localStorage.getItem('adminLoggedIn') === 'true') {
