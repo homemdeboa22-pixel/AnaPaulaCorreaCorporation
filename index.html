@@ -1,0 +1,1782 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ana Paula Correa Corporations - Impressão Personalizada</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #d32f2f;
+            --secondary-color: #1976d2;
+            --accent-color: #ffd700;
+            --dark-bg: #1a1a1a;
+            --light-bg: #f5f5f5;
+            --text-dark: #333;
+            --text-light: #fff;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--text-dark);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 30px 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .logo {
+            font-size: 2em;
+            font-weight: 800;
+            color: var(--primary-color);
+            text-decoration: none;
+            letter-spacing: -1px;
+        }
+
+        .contact-info {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .contact-item:hover {
+            color: var(--primary-color);
+        }
+
+        .nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .nav-btn:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(211, 47, 47, 0.3);
+        }
+
+        .nav-btn.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .admin-btn {
+            background: var(--accent-color);
+            color: var(--text-dark);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .admin-btn:hover {
+            background: #ffed4e;
+            transform: translateY(-2px);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.9) 0%, rgba(118, 75, 162, 0.9) 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            margin: 20px 0;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero h1 {
+            font-size: 3.5em;
+            font-weight: 800;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.3em;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        .section {
+            display: none;
+            padding: 40px 20px;
+            background: white;
+            margin: 20px 0;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .section.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section h2 {
+            font-size: 2.5em;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+            min-height: 200px;
+            position: relative;
+        }
+
+        .gallery.drag-over {
+            background: rgba(211, 47, 47, 0.1);
+            border: 3px dashed var(--primary-color);
+            border-radius: 15px;
+        }
+
+        .gallery-item {
+            position: relative;
+            background: var(--light-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .drop-zone {
+            border: 3px dashed #ccc;
+            border-radius: 15px;
+            padding: 60px 20px;
+            text-align: center;
+            color: #999;
+            margin-top: 20px;
+            transition: all 0.3s;
+            background: var(--light-bg);
+        }
+
+        .drop-zone.drag-over {
+            border-color: var(--primary-color);
+            background: rgba(211, 47, 47, 0.1);
+            color: var(--primary-color);
+        }
+
+        .drop-zone p {
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+
+        .sync-section {
+            background: var(--light-bg);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .sync-section.active {
+            display: block;
+        }
+
+        .sync-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery-item .delete-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(211, 47, 47, 0.9);
+            color: white;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .gallery-item:hover .delete-btn {
+            display: flex;
+        }
+
+        .delete-btn:hover {
+            background: rgba(211, 47, 47, 1);
+            transform: scale(1.1);
+        }
+
+        .add-image-form {
+            background: var(--light-bg);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            display: none;
+        }
+
+        .add-image-form.active {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+
+        .add-image-form.active #camisaImgurUploadInput,
+        .add-image-form.active #canecaImgurUploadInput {
+            display: block !important;
+        }
+
+        .add-image-form.active #camisaImgurLinkInput,
+        .add-image-form.active #canecaImgurLinkInput {
+            display: block !important;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: 'Poppins', sans-serif;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .btn:hover {
+            background: #b71c1c;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(211, 47, 47, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--secondary-color);
+        }
+
+        .btn-secondary:hover {
+            background: #1565c0;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-content h2 {
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .close-modal {
+            float: right;
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: #999;
+            transition: color 0.3s;
+        }
+
+        .close-modal:hover {
+            color: var(--primary-color);
+        }
+
+        .alert {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .alert.success {
+            background: #4caf50;
+            color: white;
+            display: block;
+        }
+
+        .alert.error {
+            background: #f44336;
+            color: white;
+            display: block;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #999;
+        }
+
+        .empty-state p {
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2em;
+            }
+
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .contact-info {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo" onclick="showSection('home'); return false;">Ana Paula Correa Corporations</a>
+                <div class="contact-info">
+                    <a href="tel:21977435581" class="contact-item">
+                        <span>📞</span>
+                        <span>21 97743-5581</span>
+                    </a>
+                    <a href="mailto:ssaninha2@gmail.com" class="contact-item">
+                        <span>✉️</span>
+                        <span>ssaninha2@gmail.com</span>
+                    </a>
+                    <button class="admin-btn" id="adminLoginBtn" onclick="openLoginModal()">Admin Login</button>
+                    <button class="admin-btn" id="adminLogoutBtn" onclick="logout()" style="display: none;">Sair</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-buttons">
+                <button class="nav-btn active" onclick="showSection('home')">Início</button>
+                <button class="nav-btn" onclick="showSection('camisas')">Camisas</button>
+                <button class="nav-btn" onclick="showSection('canecas')">Canecas</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <section id="home" class="section active">
+            <div class="hero">
+                <h1>Ana Paula Correa Corporations</h1>
+                <p>Impressão Personalizada de Alta Qualidade</p>
+                <p style="font-size: 1.1em; margin-top: 20px;">
+                    Transforme suas ideias em realidade com nossos serviços de impressão em camisas e canecas
+                </p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px;">
+                <div style="background: white; padding: 40px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); text-align: center;">
+                    <h3 style="color: var(--primary-color); font-size: 2em; margin-bottom: 15px;">Camisas</h3>
+                    <p style="color: #666; margin-bottom: 20px;">Estampas personalizadas de alta qualidade em qualquer tipo de camisa</p>
+                    <button class="btn" onclick="showSection('camisas')">Ver Galeria</button>
+                </div>
+                <div style="background: white; padding: 40px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); text-align: center;">
+                    <h3 style="color: var(--primary-color); font-size: 2em; margin-bottom: 15px;">Canecas</h3>
+                    <p style="color: #666; margin-bottom: 20px;">Personalização única em canecas cerâmicas com designs exclusivos</p>
+                    <button class="btn" onclick="showSection('canecas')">Ver Galeria</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="camisas" class="section">
+            <h2>Camisas Personalizadas</h2>
+            <div id="addCamisaBtnContainer" style="margin-bottom: 20px; display: none;">
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <button class="btn" onclick="toggleAddForm('camisas')">Adicionar Nova Imagem</button>
+                    <button class="btn btn-secondary" onclick="openImgurLinkForm('camisas')" style="background: #1bb76e; border-color: #1bb76e;">🔗 Adicionar Link Imgur</button>
+                </div>
+            </div>
+            <div id="camisasSyncSection" class="sync-section">
+                <h3 style="margin-bottom: 15px; color: var(--primary-color);">Sincronização de Dados</h3>
+                <p style="margin-bottom: 15px; color: #666;">Para compartilhar as imagens com todos, exporte os dados e faça upload em um serviço de armazenamento online (Google Drive, Dropbox, etc.) e compartilhe o link</p>
+                <div class="sync-buttons">
+                    <button class="btn" onclick="exportData('camisas')">📥 Exportar Dados JSON</button>
+                    <button class="btn btn-secondary" onclick="document.getElementById('camisasImportInput').click()">📤 Importar Dados JSON</button>
+                    <input type="file" id="camisasImportInput" accept=".json" style="display: none;" onchange="importData('camisas', this)">
+                </div>
+                <div style="margin-top: 15px; padding: 15px; background: rgba(211, 47, 47, 0.1); border-radius: 8px; border-left: 4px solid var(--primary-color);">
+                    <p style="margin: 0; color: #666; font-size: 0.9em;"><strong>💡 Dica:</strong> Para que todos vejam as imagens, faça upload do arquivo JSON exportado em um serviço de armazenamento online e compartilhe o link público. Depois, qualquer pessoa pode importar os dados usando o link.</p>
+                </div>
+            </div>
+            <div id="addCamisaForm" class="add-image-form">
+                <h3 style="margin-bottom: 20px; color: var(--primary-color);">Adicionar Nova Camisa</h3>
+                <div class="form-group">
+                    <label>Escolha uma opção:</label>
+                    <select id="camisaImageType" onchange="toggleImageInput('camisas')">
+                        <option value="imgur-upload">📤 Upload para Imgur (Recomendado)</option>
+                        <option value="imgur-link">🔗 Adicionar Link do Imgur</option>
+                        <option value="url">🌐 URL da Imagem (Outro serviço)</option>
+                        <option value="upload">💾 Upload Local (Apenas este navegador)</option>
+                    </select>
+                </div>
+                <div class="form-group" id="camisaImgurUploadInput">
+                    <label for="camisaImageImgur">Selecionar Imagem para Upload no Imgur:</label>
+                    <input type="file" id="camisaImageImgur" accept="image/*" onchange="previewImage('camisas', this, 'imgur')">
+                    <div id="camisaImgurPreview" style="margin-top: 10px;"></div>
+                    <div id="camisaImgurStatus" style="margin-top: 10px;"></div>
+                    <button type="button" class="btn" id="camisaUploadImgurBtn" onclick="uploadToImgur('camisas')" style="margin-top: 10px; display: none;">📤 Fazer Upload para Imgur</button>
+                    <div style="margin-top: 15px; padding: 15px; background: rgba(76, 175, 80, 0.1); border-radius: 8px; border-left: 4px solid #4caf50;">
+                        <p style="margin: 0; color: #666; font-size: 0.9em;"><strong>✅ Vantagem:</strong> As imagens enviadas para o Imgur ficam disponíveis para todos os visitantes do site!</p>
+                    </div>
+                </div>
+                <div class="form-group" id="camisaImgurLinkInput" style="display: none;">
+                    <label for="camisaImageImgurLink">Cole o link do Imgur aqui:</label>
+                    <input type="url" id="camisaImageImgurLink" placeholder="https://i.imgur.com/xxxxx.jpg ou https://imgur.com/xxxxx" oninput="previewImgurLink('camisas', this.value)">
+                    <div id="camisaImgurLinkPreview" style="margin-top: 10px;"></div>
+                    <div style="margin-top: 10px; padding: 10px; background: rgba(211, 47, 47, 0.1); border-radius: 8px;">
+                        <p style="margin: 0; color: #666; font-size: 0.85em;">💡 <strong>Como obter o link:</strong> Faça upload no <a href="https://imgur.com/upload" target="_blank" style="color: var(--primary-color);">Imgur.com</a>, depois clique com botão direito na imagem e "Copiar endereço da imagem" ou use o link direto (i.imgur.com/xxxxx.jpg)</p>
+                    </div>
+                </div>
+                <div class="form-group" id="camisaUrlInput" style="display: none;">
+                    <label for="camisaImageUrl">URL da Imagem (outro serviço):</label>
+                    <input type="url" id="camisaImageUrl" placeholder="https://exemplo.com/imagem.jpg">
+                </div>
+                <div class="form-group" id="camisaUploadInput" style="display: none;">
+                    <label for="camisaImageUpload">Selecionar Imagem:</label>
+                    <input type="file" id="camisaImageUpload" accept="image/*" onchange="previewImage('camisas', this)">
+                    <div id="camisaPreview" style="margin-top: 10px;"></div>
+                </div>
+                <div class="form-group">
+                    <label for="camisaDescription">Descrição (opcional):</label>
+                    <input type="text" id="camisaDescription" placeholder="Ex: Camisa com estampa de Jesus Médico">
+                </div>
+                <button class="btn" onclick="addImage('camisas')" id="camisaAddBtn">Adicionar Imagem</button>
+                <button class="btn btn-secondary" onclick="toggleAddForm('camisas')" style="margin-left: 10px;">Cancelar</button>
+            </div>
+            <div class="drop-zone" id="camisasDropZone" style="display: none;">
+                <p style="font-size: 3em; margin-bottom: 10px;">📤</p>
+                <p><strong>Arraste e solte imagens aqui</strong></p>
+                <p style="font-size: 0.9em; margin-top: 5px;">ou clique para selecionar arquivos</p>
+                <p style="font-size: 0.8em; color: #999; margin-top: 10px;">Você pode arrastar múltiplas imagens de uma vez</p>
+            </div>
+            <div id="camisasGallery" class="gallery"></div>
+        </section>
+
+        <section id="canecas" class="section">
+            <h2>Canecas Personalizadas</h2>
+            <div id="addCanecaBtnContainer" style="margin-bottom: 20px; display: none;">
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <button class="btn" onclick="toggleAddForm('canecas')">Adicionar Nova Imagem</button>
+                    <button class="btn btn-secondary" onclick="openImgurLinkForm('canecas')" style="background: #1bb76e; border-color: #1bb76e;">🔗 Adicionar Link Imgur</button>
+                </div>
+            </div>
+            <div id="canecasSyncSection" class="sync-section">
+                <h3 style="margin-bottom: 15px; color: var(--primary-color);">Sincronização de Dados</h3>
+                <p style="margin-bottom: 15px; color: #666;">Para compartilhar as imagens com todos, exporte os dados e faça upload em um serviço de armazenamento online (Google Drive, Dropbox, etc.) e compartilhe o link</p>
+                <div class="sync-buttons">
+                    <button class="btn" onclick="exportData('canecas')">📥 Exportar Dados JSON</button>
+                    <button class="btn btn-secondary" onclick="document.getElementById('canecasImportInput').click()">📤 Importar Dados JSON</button>
+                    <input type="file" id="canecasImportInput" accept=".json" style="display: none;" onchange="importData('canecas', this)">
+                </div>
+                <div style="margin-top: 15px; padding: 15px; background: rgba(211, 47, 47, 0.1); border-radius: 8px; border-left: 4px solid var(--primary-color);">
+                    <p style="margin: 0; color: #666; font-size: 0.9em;"><strong>💡 Dica:</strong> Para que todos vejam as imagens, faça upload do arquivo JSON exportado em um serviço de armazenamento online e compartilhe o link público. Depois, qualquer pessoa pode importar os dados usando o link.</p>
+                </div>
+            </div>
+            <div id="addCanecaForm" class="add-image-form">
+                <h3 style="margin-bottom: 20px; color: var(--primary-color);">Adicionar Nova Caneca</h3>
+                <div class="form-group">
+                    <label>Escolha uma opção:</label>
+                    <select id="canecaImageType" onchange="toggleImageInput('canecas')">
+                        <option value="imgur-upload">📤 Upload para Imgur (Recomendado)</option>
+                        <option value="imgur-link">🔗 Adicionar Link do Imgur</option>
+                        <option value="url">🌐 URL da Imagem (Outro serviço)</option>
+                        <option value="upload">💾 Upload Local (Apenas este navegador)</option>
+                    </select>
+                </div>
+                <div class="form-group" id="canecaImgurUploadInput">
+                    <label for="canecaImageImgur">Selecionar Imagem para Upload no Imgur:</label>
+                    <input type="file" id="canecaImageImgur" accept="image/*" onchange="previewImage('canecas', this, 'imgur')">
+                    <div id="canecaImgurPreview" style="margin-top: 10px;"></div>
+                    <div id="canecaImgurStatus" style="margin-top: 10px;"></div>
+                    <button type="button" class="btn" id="canecaUploadImgurBtn" onclick="uploadToImgur('canecas')" style="margin-top: 10px; display: none;">📤 Fazer Upload para Imgur</button>
+                    <div style="margin-top: 15px; padding: 15px; background: rgba(76, 175, 80, 0.1); border-radius: 8px; border-left: 4px solid #4caf50;">
+                        <p style="margin: 0; color: #666; font-size: 0.9em;"><strong>✅ Vantagem:</strong> As imagens enviadas para o Imgur ficam disponíveis para todos os visitantes do site!</p>
+                    </div>
+                </div>
+                <div class="form-group" id="canecaImgurLinkInput" style="display: none;">
+                    <label for="canecaImageImgurLink">Cole o link do Imgur aqui:</label>
+                    <input type="url" id="canecaImageImgurLink" placeholder="https://i.imgur.com/xxxxx.jpg ou https://imgur.com/xxxxx" oninput="previewImgurLink('canecas', this.value)">
+                    <div id="canecaImgurLinkPreview" style="margin-top: 10px;"></div>
+                    <div style="margin-top: 10px; padding: 10px; background: rgba(211, 47, 47, 0.1); border-radius: 8px;">
+                        <p style="margin: 0; color: #666; font-size: 0.85em;">💡 <strong>Como obter o link:</strong> Faça upload no <a href="https://imgur.com/upload" target="_blank" style="color: var(--primary-color);">Imgur.com</a>, depois clique com botão direito na imagem e "Copiar endereço da imagem" ou use o link direto (i.imgur.com/xxxxx.jpg)</p>
+                    </div>
+                </div>
+                <div class="form-group" id="canecaUrlInput" style="display: none;">
+                    <label for="canecaImageUrl">URL da Imagem (outro serviço):</label>
+                    <input type="url" id="canecaImageUrl" placeholder="https://exemplo.com/imagem.jpg">
+                </div>
+                <div class="form-group" id="canecaUploadInput" style="display: none;">
+                    <label for="canecaImageUpload">Selecionar Imagem:</label>
+                    <input type="file" id="canecaImageUpload" accept="image/*" onchange="previewImage('canecas', this)">
+                    <div id="canecaPreview" style="margin-top: 10px;"></div>
+                </div>
+                <div class="form-group">
+                    <label for="canecaDescription">Descrição (opcional):</label>
+                    <input type="text" id="canecaDescription" placeholder="Ex: Caneca com design floral e versículo">
+                </div>
+                <button class="btn" onclick="addImage('canecas')" id="canecaAddBtn">Adicionar Imagem</button>
+                <button class="btn btn-secondary" onclick="toggleAddForm('canecas')" style="margin-left: 10px;">Cancelar</button>
+            </div>
+            <div class="drop-zone" id="canecasDropZone" style="display: none;">
+                <p style="font-size: 3em; margin-bottom: 10px;">📤</p>
+                <p><strong>Arraste e solte imagens aqui</strong></p>
+                <p style="font-size: 0.9em; margin-top: 5px;">ou clique para selecionar arquivos</p>
+                <p style="font-size: 0.8em; color: #999; margin-top: 10px;">Você pode arrastar múltiplas imagens de uma vez</p>
+            </div>
+            <div id="canecasGallery" class="gallery"></div>
+        </section>
+    </div>
+
+    <!-- Modal de Login -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeLoginModal()">&times;</button>
+            <h2>Login Administrativo</h2>
+            <div id="loginAlert"></div>
+            <form id="loginForm" onsubmit="handleLogin(event); return false;">
+                <div class="form-group">
+                    <label for="adminUsername">Usuário:</label>
+                    <input type="text" id="adminUsername" required autocomplete="username">
+                </div>
+                <div class="form-group">
+                    <label for="adminPassword">Senha:</label>
+                    <input type="password" id="adminPassword" required autocomplete="current-password">
+                </div>
+                <button type="submit" class="btn" style="width: 100%;">Entrar</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Verificar se está logado
+        function checkAuth() {
+            const isLoggedIn = localStorage.getItem('adminLoggedIn') === 'true';
+            const adminLoginBtn = document.getElementById('adminLoginBtn');
+            const adminLogoutBtn = document.getElementById('adminLogoutBtn');
+            
+            if (isLoggedIn) {
+                adminLoginBtn.style.display = 'none';
+                adminLogoutBtn.style.display = 'inline-block';
+                showAddButtons();
+            } else {
+                adminLoginBtn.style.display = 'inline-block';
+                adminLogoutBtn.style.display = 'none';
+                hideAddButtons();
+            }
+        }
+
+        // Mostrar seção
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                targetSection.classList.add('active');
+            }
+
+            // Ativar botão correspondente
+            const navButtons = document.querySelectorAll('.nav-btn');
+            navButtons.forEach(btn => {
+                if (btn.textContent.includes('Início') && sectionId === 'home') {
+                    btn.classList.add('active');
+                } else if (btn.textContent.includes('Camisas') && sectionId === 'camisas') {
+                    btn.classList.add('active');
+                } else if (btn.textContent.includes('Canecas') && sectionId === 'canecas') {
+                    btn.classList.add('active');
+                }
+            });
+
+            // Carregar galeria
+            if (sectionId === 'camisas' || sectionId === 'canecas') {
+                loadGallery(sectionId);
+            }
+        }
+
+        // Abrir modal de login
+        function openLoginModal() {
+            document.getElementById('loginModal').classList.add('active');
+        }
+
+        // Fechar modal de login
+        function closeLoginModal() {
+            document.getElementById('loginModal').classList.remove('active');
+            document.getElementById('loginForm').reset();
+            document.getElementById('loginAlert').innerHTML = '';
+        }
+
+        // Login
+        function handleLogin(event) {
+            event.preventDefault();
+            
+            const username = document.getElementById('adminUsername').value;
+            const password = document.getElementById('adminPassword').value;
+            const alertDiv = document.getElementById('loginAlert');
+
+            if (username === 'AnaPaulaADM' && password === 'lucas300ADM') {
+                localStorage.setItem('adminLoggedIn', 'true');
+                alertDiv.innerHTML = '<div class="alert success">Login realizado com sucesso!</div>';
+                setTimeout(() => {
+                    closeLoginModal();
+                    checkAuth();
+                }, 1000);
+            } else {
+                alertDiv.innerHTML = '<div class="alert error">Usuário ou senha incorretos!</div>';
+            }
+        }
+
+        // Logout
+        function logout() {
+            if (confirm('Deseja realmente sair?')) {
+                localStorage.removeItem('adminLoggedIn');
+                checkAuth();
+                showSection('home');
+            }
+        }
+
+        // Mostrar botões de adicionar
+        function showAddButtons() {
+            document.getElementById('addCamisaBtnContainer').style.display = 'block';
+            document.getElementById('addCanecaBtnContainer').style.display = 'block';
+            document.getElementById('camisasSyncSection').classList.add('active');
+            document.getElementById('canecasSyncSection').classList.add('active');
+            document.getElementById('camisasDropZone').style.display = 'block';
+            document.getElementById('canecasDropZone').style.display = 'block';
+            setupDragAndDrop('camisas');
+            setupDragAndDrop('canecas');
+        }
+
+        // Esconder botões de adicionar
+        function hideAddButtons() {
+            document.getElementById('addCamisaBtnContainer').style.display = 'none';
+            document.getElementById('addCanecaBtnContainer').style.display = 'none';
+            document.getElementById('camisasSyncSection').classList.remove('active');
+            document.getElementById('canecasSyncSection').classList.remove('active');
+            document.getElementById('camisasDropZone').style.display = 'none';
+            document.getElementById('canecasDropZone').style.display = 'none';
+            document.querySelectorAll('.add-image-form').forEach(form => {
+                form.classList.remove('active');
+            });
+        }
+
+        // Configurar drag and drop
+        function setupDragAndDrop(section) {
+            const gallery = document.getElementById(`${section}Gallery`);
+            const dropZone = document.getElementById(`${section}DropZone`);
+
+            if (!gallery || !dropZone) return;
+
+            // Prevenir comportamento padrão
+            [gallery, dropZone].forEach(element => {
+                element.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    element.classList.add('drag-over');
+                });
+
+                element.addEventListener('dragleave', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    element.classList.remove('drag-over');
+                });
+
+                element.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    element.classList.remove('drag-over');
+
+                    const files = e.dataTransfer.files;
+                    if (files.length > 0) {
+                        handleDroppedFiles(section, files);
+                    }
+                });
+            });
+
+            // Clique na drop zone
+            dropZone.addEventListener('click', () => {
+                const input = document.getElementById(`${section}ImageUpload`);
+                if (input) {
+                    input.click();
+                }
+            });
+
+            // Permitir múltiplos arquivos no input
+            const uploadInput = document.getElementById(`${section}ImageUpload`);
+            if (uploadInput) {
+                uploadInput.setAttribute('multiple', 'multiple');
+                uploadInput.addEventListener('change', (e) => {
+                    if (e.target.files.length > 0) {
+                        handleDroppedFiles(section, e.target.files);
+                    }
+                });
+            }
+        }
+
+        // Processar arquivos arrastados
+        function handleDroppedFiles(section, files) {
+            const isLoggedIn = localStorage.getItem('adminLoggedIn') === 'true';
+            if (!isLoggedIn) {
+                alert('Você precisa estar logado como administrador para adicionar imagens!');
+                return;
+            }
+
+            const imageFiles = Array.from(files).filter(file => file.type.startsWith('image/'));
+            
+            if (imageFiles.length === 0) {
+                alert('Por favor, arraste apenas arquivos de imagem!');
+                return;
+            }
+
+            let processed = 0;
+            imageFiles.forEach((file, index) => {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const imageUrl = e.target.result;
+                    const description = file.name.replace(/\.[^/.]+$/, ''); // Remove extensão
+                    saveImage(section, imageUrl, description, false);
+                    processed++;
+                    if (processed === imageFiles.length) {
+                        alert(`${processed} imagem(ns) adicionada(s) com sucesso!`);
+                    }
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+
+        // Exportar dados
+        function exportData(section) {
+            const images = JSON.parse(localStorage.getItem(`${section}Images`) || '[]');
+            const dataStr = JSON.stringify(images, null, 2);
+            const dataBlob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(dataBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `${section}_dados.json`;
+            link.click();
+            URL.revokeObjectURL(url);
+            alert('Dados exportados com sucesso!');
+        }
+
+        // Importar dados
+        function importData(section, input) {
+            const file = input.files[0];
+            if (!file) {
+                // Tentar importar de URL
+                const url = prompt('Cole a URL do arquivo JSON para importar:');
+                if (url) {
+                    fetch(url)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (Array.isArray(data)) {
+                                localStorage.setItem(`${section}Images`, JSON.stringify(data));
+                                loadGallery(section);
+                                alert('Dados importados com sucesso da URL!');
+                            } else {
+                                alert('Formato de arquivo inválido!');
+                            }
+                        })
+                        .catch(error => {
+                            alert('Erro ao importar da URL: ' + error.message);
+                        });
+                }
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const importedData = JSON.parse(e.target.result);
+                    if (Array.isArray(importedData)) {
+                        // Substituir completamente os dados (ou mesclar se preferir)
+                        localStorage.setItem(`${section}Images`, JSON.stringify(importedData));
+                        loadGallery(section);
+                        alert('Dados importados com sucesso!');
+                    } else {
+                        alert('Formato de arquivo inválido!');
+                    }
+                } catch (error) {
+                    alert('Erro ao importar dados: ' + error.message);
+                }
+            };
+            reader.readAsText(file);
+            input.value = '';
+        }
+
+        // Tentar carregar dados de URL compartilhada na inicialização
+        function tryLoadSharedData() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const camisasUrl = urlParams.get('camisas');
+            const canecasUrl = urlParams.get('canecas');
+
+            if (camisasUrl) {
+                fetch(camisasUrl)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (Array.isArray(data)) {
+                            localStorage.setItem('camisasImages', JSON.stringify(data));
+                            loadGallery('camisas');
+                        }
+                    })
+                    .catch(error => console.error('Erro ao carregar dados de camisas:', error));
+            }
+
+            if (canecasUrl) {
+                fetch(canecasUrl)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (Array.isArray(data)) {
+                            localStorage.setItem('canecasImages', JSON.stringify(data));
+                            loadGallery('canecas');
+                        }
+                    })
+                    .catch(error => console.error('Erro ao carregar dados de canecas:', error));
+            }
+        }
+
+        // Toggle formulário de adicionar
+        function toggleAddForm(section) {
+            // Mapear seção para ID correto do formulário
+            const formIdMap = {
+                'camisas': 'addCamisaForm',
+                'canecas': 'addCanecaForm'
+            };
+            
+            const formId = formIdMap[section];
+            if (!formId) {
+                console.error(`Seção inválida: ${section}`);
+                return;
+            }
+            
+            const form = document.getElementById(formId);
+            
+            if (!form) {
+                console.error(`Formulário não encontrado: ${formId}`);
+                return;
+            }
+            
+            const isActive = form.classList.contains('active');
+            form.classList.toggle('active');
+            
+            // Se estiver abrindo o formulário, inicializar com Imgur Upload
+            if (!isActive) {
+                // Garantir que o select está em 'imgur-upload'
+                const select = document.getElementById(`${section}ImageType`);
+                if (select) {
+                    select.value = 'imgur-upload';
+                }
+                
+                // Inicializar a visualização imediatamente
+                toggleImageInput(section);
+            }
+        }
+
+        // Preview de link do Imgur
+        function previewImgurLink(section, url) {
+            // Mapear seção para ID correto (singular)
+            const previewIdMap = {
+                'camisas': 'camisaImgurLinkPreview',
+                'canecas': 'canecaImgurLinkPreview'
+            };
+            
+            const previewId = previewIdMap[section];
+            if (!previewId) return;
+            
+            const preview = document.getElementById(previewId);
+            if (!preview) return;
+
+            if (!url || url.trim() === '') {
+                preview.innerHTML = '';
+                return;
+            }
+
+            // Converter link do Imgur para formato direto (mesma lógica da função addImage)
+            let imageUrl = url.trim();
+            if (imageUrl.includes('imgur.com/')) {
+                // Se já é um link direto de imagem (i.imgur.com), usar como está
+                if (imageUrl.includes('i.imgur.com/')) {
+                    // Já está no formato correto, garantir que tenha https
+                    if (!imageUrl.startsWith('http')) {
+                        imageUrl = 'https://' + imageUrl;
+                    }
+                    // Se já tem extensão (.jpg, .jpeg, .png, etc.), manter
+                    // Se não tem extensão, adicionar .jpg
+                    if (!imageUrl.match(/\.(jpg|jpeg|png|gif|webp)$/i)) {
+                        // Remover qualquer query string ou hash
+                        const baseUrl = imageUrl.split('?')[0].split('#')[0];
+                        imageUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + '.jpg';
+                    }
+                } else if (imageUrl.includes('/a/')) {
+                    // É um álbum - tentar pegar o ID do álbum
+                    const albumId = imageUrl.split('/a/')[1].split('/')[0].split('?')[0].split('#')[0];
+                    if (albumId) {
+                        imageUrl = `https://i.imgur.com/${albumId}.jpg`;
+                    }
+                } else {
+                    // Link simples: imgur.com/xxxxx ou imgur.com/gallery/xxxxx
+                    let imgurId = '';
+                    if (imageUrl.includes('/gallery/')) {
+                        imgurId = imageUrl.split('/gallery/')[1].split('/')[0].split('?')[0].split('#')[0];
+                    } else {
+                        // Formato padrão: imgur.com/ID ou imgur.com/ID.extensão
+                        const pathPart = imageUrl.split('imgur.com/')[1].split('/')[0].split('?')[0].split('#')[0];
+                        imgurId = pathPart;
+                    }
+                    
+                    if (imgurId && imgurId.length > 0) {
+                        // Se já tem extensão, usar como está; senão, adicionar .jpg
+                        if (imgurId.match(/\.(jpg|jpeg|png|gif|webp)$/i)) {
+                            imageUrl = `https://i.imgur.com/${imgurId}`;
+                        } else {
+                            imageUrl = `https://i.imgur.com/${imgurId}.jpg`;
+                        }
+                    }
+                }
+            }
+
+            // Mostrar preview
+            preview.innerHTML = `
+                <div style="padding: 10px; background: rgba(76, 175, 80, 0.1); border-radius: 8px; border-left: 4px solid #4caf50;">
+                    <p style="margin: 0 0 10px 0; color: #666; font-size: 0.9em;"><strong>Preview:</strong></p>
+                    <img src="${imageUrl}" style="max-width: 300px; max-height: 300px; border-radius: 8px; border: 2px solid #4caf50;" 
+                         onerror="this.parentElement.innerHTML='<p style=\'color: #f44336; padding: 10px;\'>❌ Link inválido ou imagem não encontrada. Tente usar o link direto: i.imgur.com/ID.jpg</p>'">
+                    <p style="margin: 10px 0 0 0; color: #666; font-size: 0.85em;">Link convertido: <code style="background: rgba(0,0,0,0.1); padding: 2px 5px; border-radius: 3px;">${imageUrl}</code></p>
+                </div>
+            `;
+        }
+
+        // Abrir formulário direto para adicionar link do Imgur
+        function openImgurLinkForm(section) {
+            // Mapear seção para IDs corretos (singular)
+            const idMap = {
+                'camisas': {
+                    form: 'addCamisaForm',
+                    prefix: 'camisa',
+                    select: 'camisaImageType',
+                    imgurLinkContainer: 'camisaImgurLinkInput',
+                    imgurLinkInput: 'camisaImageImgurLink',
+                    imgurUpload: 'camisaImgurUploadInput',
+                    url: 'camisaUrlInput',
+                    upload: 'camisaUploadInput'
+                },
+                'canecas': {
+                    form: 'addCanecaForm',
+                    prefix: 'caneca',
+                    select: 'canecaImageType',
+                    imgurLinkContainer: 'canecaImgurLinkInput',
+                    imgurLinkInput: 'canecaImageImgurLink',
+                    imgurUpload: 'canecaImgurUploadInput',
+                    url: 'canecaUrlInput',
+                    upload: 'canecaUploadInput'
+                }
+            };
+            
+            const ids = idMap[section];
+            if (!ids) {
+                alert('Erro: Seção inválida!');
+                return;
+            }
+            
+            const form = document.getElementById(ids.form);
+            if (!form) {
+                alert('Erro: Formulário não encontrado! Por favor, recarregue a página.');
+                return;
+            }
+            
+            // Abrir o formulário
+            form.classList.add('active');
+            form.style.display = 'block';
+            
+            // Esconder todos os campos primeiro
+            const imgurUploadInput = document.getElementById(ids.imgurUpload);
+            const urlInput = document.getElementById(ids.url);
+            const uploadInput = document.getElementById(ids.upload);
+            
+            if (imgurUploadInput) imgurUploadInput.style.display = 'none';
+            if (urlInput) urlInput.style.display = 'none';
+            if (uploadInput) uploadInput.style.display = 'none';
+            
+            // Mostrar APENAS o campo de link do Imgur
+            const imgurLinkContainer = document.getElementById(ids.imgurLinkContainer);
+            if (imgurLinkContainer) {
+                imgurLinkContainer.style.display = 'block';
+                imgurLinkContainer.style.setProperty('display', 'block', 'important');
+            } else {
+                alert('Erro: Campo de link do Imgur não encontrado!');
+                return;
+            }
+            
+            // Atualizar o select se existir
+            const select = document.getElementById(ids.select);
+            if (select) {
+                select.value = 'imgur-link';
+            }
+            
+            // Focar no campo de input e rolar até ele
+            setTimeout(() => {
+                const linkInput = document.getElementById(ids.imgurLinkInput);
+                if (linkInput) {
+                    linkInput.focus();
+                    linkInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }, 100);
+        }
+
+        // Toggle tipo de input de imagem
+        function toggleImageInput(section) {
+            // Mapear seção para IDs corretos (singular)
+            const idMap = {
+                'camisas': {
+                    imageType: 'camisaImageType',
+                    imgurUpload: 'camisaImgurUploadInput',
+                    imgurLink: 'camisaImgurLinkInput',
+                    url: 'camisaUrlInput',
+                    upload: 'camisaUploadInput',
+                    preview: 'camisaPreview',
+                    imgurPreview: 'camisaImgurPreview',
+                    imgurStatus: 'camisaImgurStatus',
+                    addBtn: 'camisaAddBtn'
+                },
+                'canecas': {
+                    imageType: 'canecaImageType',
+                    imgurUpload: 'canecaImgurUploadInput',
+                    imgurLink: 'canecaImgurLinkInput',
+                    url: 'canecaUrlInput',
+                    upload: 'canecaUploadInput',
+                    preview: 'canecaPreview',
+                    imgurPreview: 'canecaImgurPreview',
+                    imgurStatus: 'canecaImgurStatus',
+                    addBtn: 'canecaAddBtn'
+                }
+            };
+
+            const ids = idMap[section];
+            if (!ids) {
+                console.error(`Seção inválida: ${section}`);
+                return;
+            }
+
+            const typeSelect = document.getElementById(ids.imageType);
+            if (!typeSelect) {
+                console.error(`Select não encontrado: ${ids.imageType}`);
+                return;
+            }
+            
+            const type = typeSelect.value;
+            const imgurUploadInput = document.getElementById(ids.imgurUpload);
+            const imgurLinkInput = document.getElementById(ids.imgurLink);
+            const urlInput = document.getElementById(ids.url);
+            const uploadInput = document.getElementById(ids.upload);
+            const preview = document.getElementById(ids.preview);
+            const imgurPreview = document.getElementById(ids.imgurPreview);
+            const imgurStatus = document.getElementById(ids.imgurStatus);
+            const addBtn = document.getElementById(ids.addBtn);
+
+            // Esconder todos primeiro
+            if (imgurUploadInput) imgurUploadInput.style.display = 'none';
+            if (imgurLinkInput) imgurLinkInput.style.display = 'none';
+            if (urlInput) urlInput.style.display = 'none';
+            if (uploadInput) uploadInput.style.display = 'none';
+            if (preview) preview.innerHTML = '';
+            if (imgurPreview) imgurPreview.innerHTML = '';
+            if (imgurStatus) imgurStatus.innerHTML = '';
+            if (addBtn) addBtn.style.display = 'inline-block';
+
+            // Mostrar o input correspondente
+            if (type === 'imgur-upload') {
+                if (imgurUploadInput) {
+                    imgurUploadInput.style.display = 'block';
+                }
+            } else if (type === 'imgur-link') {
+                if (imgurLinkInput) {
+                    imgurLinkInput.style.display = 'block';
+                }
+            } else if (type === 'url') {
+                if (urlInput) {
+                    urlInput.style.display = 'block';
+                }
+            } else if (type === 'upload') {
+                if (uploadInput) {
+                    uploadInput.style.display = 'block';
+                }
+            }
+        }
+
+        // Preview de imagem
+        function previewImage(section, input, type = 'local') {
+            const preview = type === 'imgur' 
+                ? document.getElementById(`${section}ImgurPreview`)
+                : document.getElementById(`${section}Preview`);
+            const uploadBtn = type === 'imgur' 
+                ? document.getElementById(`${section}UploadImgurBtn`)
+                : null;
+            const status = type === 'imgur'
+                ? document.getElementById(`${section}ImgurStatus`)
+                : null;
+
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    if (preview) {
+                        preview.innerHTML = `
+                            <img src="${e.target.result}" style="max-width: 200px; max-height: 200px; border-radius: 8px; margin-top: 10px; border: 2px solid var(--primary-color);">
+                            <p style="margin-top: 10px; color: #666; font-size: 0.9em;">Arquivo: ${input.files[0].name}</p>
+                        `;
+                    }
+                    if (uploadBtn) {
+                        uploadBtn.style.display = 'inline-block';
+                        uploadBtn.dataset.fileData = e.target.result;
+                    }
+                    if (status) {
+                        status.innerHTML = '';
+                    }
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        // Upload para Imgur
+        async function uploadToImgur(section) {
+            const isLoggedIn = localStorage.getItem('adminLoggedIn') === 'true';
+            if (!isLoggedIn) {
+                alert('Você precisa estar logado como administrador!');
+                return;
+            }
+
+            const input = document.getElementById(`${section}ImageImgur`);
+            const uploadBtn = document.getElementById(`${section}UploadImgurBtn`);
+            const status = document.getElementById(`${section}ImgurStatus`);
+            const descriptionInput = document.getElementById(`${section}Description`);
+
+            if (!input.files || !input.files[0]) {
+                alert('Por favor, selecione uma imagem primeiro!');
+                return;
+            }
+
+            const file = input.files[0];
+            const description = descriptionInput ? descriptionInput.value.trim() : '';
+
+            // Mostrar status de carregamento
+            if (status) {
+                status.innerHTML = '<div style="color: var(--primary-color);">⏳ Fazendo upload para Imgur...</div>';
+            }
+            if (uploadBtn) {
+                uploadBtn.disabled = true;
+                uploadBtn.textContent = '⏳ Enviando...';
+            }
+
+            try {
+                // Converter arquivo para base64
+                const base64 = await fileToBase64(file);
+                const base64Data = base64.split(',')[1]; // Remove o prefixo data:image/...
+                
+                // Fazer upload para Imgur usando API pública
+                // A API do Imgur aceita base64 diretamente no body como FormData
+                const formData = new FormData();
+                formData.append('image', base64Data);
+                formData.append('type', 'base64');
+
+                const response = await fetch('https://api.imgur.com/3/image', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': 'Client-ID 546c25a59c58ad7' // Client ID público do Imgur para upload anônimo
+                    },
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (data.success && data.data) {
+                    const imgurLink = data.data.link;
+                    
+                    // Salvar no localStorage
+                    const images = JSON.parse(localStorage.getItem(`${section}Images`) || '[]');
+                    images.push({
+                        url: imgurLink,
+                        description: description || `Imagem enviada para Imgur`,
+                        id: Date.now(),
+                        source: 'imgur'
+                    });
+                    localStorage.setItem(`${section}Images`, JSON.stringify(images));
+
+                    // Limpar formulário
+                    input.value = '';
+                    if (document.getElementById(`${section}ImgurPreview`)) {
+                        document.getElementById(`${section}ImgurPreview`).innerHTML = '';
+                    }
+                    if (descriptionInput) descriptionInput.value = '';
+                    if (uploadBtn) {
+                        uploadBtn.style.display = 'none';
+                        uploadBtn.disabled = false;
+                        uploadBtn.textContent = '📤 Fazer Upload para Imgur';
+                    }
+                    if (status) {
+                        status.innerHTML = `<div style="color: #4caf50; padding: 10px; background: rgba(76, 175, 80, 0.1); border-radius: 8px;">
+                            ✅ Upload realizado com sucesso!<br>
+                            <strong>Link Imgur:</strong> <a href="${imgurLink}" target="_blank" style="color: var(--primary-color);">${imgurLink}</a><br>
+                            A imagem está disponível para todos os visitantes.
+                        </div>`;
+                    }
+
+                    // Recarregar galeria
+                    loadGallery(section);
+
+                    setTimeout(() => {
+                        if (status) status.innerHTML = '';
+                    }, 5000);
+                } else {
+                    throw new Error(data.data?.error || data.data?.error_description || 'Erro ao fazer upload');
+                }
+            } catch (error) {
+                console.error('Erro no upload:', error);
+                if (status) {
+                    status.innerHTML = `<div style="color: #f44336; padding: 10px; background: rgba(244, 67, 54, 0.1); border-radius: 8px;">
+                        ❌ Erro ao fazer upload: ${error.message}<br>
+                        <strong>Solução:</strong> Faça upload manualmente no <a href="https://imgur.com/upload" target="_blank" style="color: var(--primary-color);">Imgur.com</a> e use a opção "URL da Imagem".
+                    </div>`;
+                }
+                if (uploadBtn) {
+                    uploadBtn.disabled = false;
+                    uploadBtn.textContent = '📤 Fazer Upload para Imgur';
+                }
+            }
+        }
+
+        // Converter arquivo para base64
+        function fileToBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
+        }
+
+        // Adicionar imagem
+        function addImage(section) {
+            const isLoggedIn = localStorage.getItem('adminLoggedIn') === 'true';
+            if (!isLoggedIn) {
+                alert('Você precisa estar logado como administrador!');
+                return;
+            }
+
+            // Mapear seção para IDs corretos (singular)
+            const idMap = {
+                'camisas': {
+                    prefix: 'camisa',
+                    imageType: 'camisaImageType',
+                    description: 'camisaDescription',
+                    imgurLink: 'camisaImageImgurLink',
+                    imageUrl: 'camisaImageUrl',
+                    imageUpload: 'camisaImageUpload'
+                },
+                'canecas': {
+                    prefix: 'caneca',
+                    imageType: 'canecaImageType',
+                    description: 'canecaDescription',
+                    imgurLink: 'canecaImageImgurLink',
+                    imageUrl: 'canecaImageUrl',
+                    imageUpload: 'canecaImageUpload'
+                }
+            };
+
+            const ids = idMap[section];
+            if (!ids) {
+                alert('Erro: Seção inválida!');
+                return;
+            }
+
+            const imageTypeSelect = document.getElementById(ids.imageType);
+            if (!imageTypeSelect) {
+                alert('Erro: Campo de tipo não encontrado!');
+                return;
+            }
+
+            const imageType = imageTypeSelect.value;
+            const descriptionInput = document.getElementById(ids.description);
+            const description = descriptionInput ? descriptionInput.value.trim() : '';
+            let imageUrl = '';
+
+            if (imageType === 'imgur-upload') {
+                alert('Por favor, use o botão "Fazer Upload para Imgur" para enviar a imagem primeiro!');
+                return;
+            } else if (imageType === 'imgur-link') {
+                const imgurLinkInput = document.getElementById(ids.imgurLink);
+                if (!imgurLinkInput) {
+                    alert('Erro: Campo de link do Imgur não encontrado!');
+                    return;
+                }
+                imageUrl = imgurLinkInput.value.trim();
+
+                if (!imageUrl) {
+                    alert('Por favor, insira um link do Imgur!');
+                    return;
+                }
+
+                // Converter link do Imgur para formato direto se necessário
+                // imgur.com/xxxxx -> i.imgur.com/xxxxx.jpg
+                // imgur.com/a/xxxxx -> precisa buscar a imagem
+                if (imageUrl.includes('imgur.com/')) {
+                    // Se já é um link direto de imagem (i.imgur.com), usar como está
+                    if (imageUrl.includes('i.imgur.com/')) {
+                        // Já está no formato correto, garantir que tenha https
+                        if (!imageUrl.startsWith('http')) {
+                            imageUrl = 'https://' + imageUrl;
+                        }
+                        // Se já tem extensão (.jpg, .jpeg, .png, etc.), manter
+                        // Se não tem extensão, adicionar .jpg
+                        if (!imageUrl.match(/\.(jpg|jpeg|png|gif|webp)$/i)) {
+                            // Remover qualquer query string ou hash
+                            const baseUrl = imageUrl.split('?')[0].split('#')[0];
+                            imageUrl = baseUrl + (baseUrl.endsWith('/') ? '' : '/') + '.jpg';
+                        }
+                    } else if (imageUrl.includes('/a/')) {
+                        // É um álbum - tentar pegar o ID do álbum
+                        const albumId = imageUrl.split('/a/')[1].split('/')[0].split('?')[0].split('#')[0];
+                        if (albumId) {
+                            // Para álbuns, usar o ID como imagem (pode não funcionar para todos)
+                            imageUrl = `https://i.imgur.com/${albumId}.jpg`;
+                        }
+                    } else {
+                        // Link simples: imgur.com/xxxxx ou imgur.com/gallery/xxxxx
+                        let imgurId = '';
+                        if (imageUrl.includes('/gallery/')) {
+                            imgurId = imageUrl.split('/gallery/')[1].split('/')[0].split('?')[0].split('#')[0];
+                        } else {
+                            // Formato padrão: imgur.com/ID ou imgur.com/ID.extensão
+                            const pathPart = imageUrl.split('imgur.com/')[1].split('/')[0].split('?')[0].split('#')[0];
+                            // Se já tem extensão, manter; senão, adicionar .jpg
+                            if (pathPart.match(/\.(jpg|jpeg|png|gif|webp)$/i)) {
+                                imgurId = pathPart;
+                            } else {
+                                imgurId = pathPart;
+                            }
+                        }
+                        
+                        if (imgurId && imgurId.length > 0) {
+                            // Se já tem extensão, usar como está; senão, adicionar .jpg
+                            if (imgurId.match(/\.(jpg|jpeg|png|gif|webp)$/i)) {
+                                imageUrl = `https://i.imgur.com/${imgurId}`;
+                            } else {
+                                imageUrl = `https://i.imgur.com/${imgurId}.jpg`;
+                            }
+                        }
+                    }
+                }
+
+                // Validar URL
+                try {
+                    new URL(imageUrl);
+                } catch (e) {
+                    alert('Por favor, insira um link válido do Imgur!');
+                    return;
+                }
+                
+                console.log('Salvando imagem do Imgur:', imageUrl);
+                console.log('Seção:', section);
+                console.log('Descrição:', description);
+                
+                // Salvar imagem do Imgur
+                saveImage(section, imageUrl, description, true, 'imgur');
+                return;
+            } else if (imageType === 'url') {
+                const imageUrlInput = document.getElementById(ids.imageUrl);
+                if (!imageUrlInput) {
+                    alert('Erro: Campo de URL não encontrado!');
+                    return;
+                }
+                imageUrl = imageUrlInput.value.trim();
+
+                if (!imageUrl) {
+                    alert('Por favor, insira uma URL válida!');
+                    return;
+                }
+
+                // Validar URL
+                try {
+                    new URL(imageUrl);
+                } catch (e) {
+                    alert('Por favor, insira uma URL válida!');
+                    return;
+                }
+            } else {
+                const imageUploadInput = document.getElementById(ids.imageUpload);
+                if (!imageUploadInput || !imageUploadInput.files || !imageUploadInput.files[0]) {
+                    alert('Por favor, selecione uma imagem!');
+                    return;
+                }
+
+                const file = imageUploadInput.files[0];
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    imageUrl = e.target.result;
+                    saveImage(section, imageUrl, description, true, 'local');
+                };
+                
+                reader.readAsDataURL(file);
+                return;
+            }
+
+            // Salvar imagem de URL externa
+            saveImage(section, imageUrl, description, true, 'url');
+        }
+
+        // Salvar imagem
+        function saveImage(section, imageUrl, description, showAlert = true, source = 'local') {
+            console.log('saveImage chamado:', { section, imageUrl, description, source });
+            
+            // Carregar imagens existentes
+            const images = JSON.parse(localStorage.getItem(`${section}Images`) || '[]');
+            console.log('Imagens existentes:', images.length);
+            
+            // Adicionar nova imagem
+            const newImage = {
+                url: imageUrl,
+                description: description || '',
+                id: Date.now(),
+                source: source
+            };
+            images.push(newImage);
+            console.log('Nova imagem adicionada:', newImage);
+
+            // Salvar
+            localStorage.setItem(`${section}Images`, JSON.stringify(images));
+            console.log('Imagens salvas no localStorage:', images.length);
+
+            // Mapear seção para IDs corretos (singular)
+            const idMap = {
+                'camisas': {
+                    url: 'camisaImageUrl',
+                    upload: 'camisaImageUpload',
+                    imgurLink: 'camisaImageImgurLink',
+                    description: 'camisaDescription',
+                    preview: 'camisaPreview',
+                    imgurLinkPreview: 'camisaImgurLinkPreview',
+                    imageType: 'camisaImageType'
+                },
+                'canecas': {
+                    url: 'canecaImageUrl',
+                    upload: 'canecaImageUpload',
+                    imgurLink: 'canecaImageImgurLink',
+                    description: 'canecaDescription',
+                    preview: 'canecaPreview',
+                    imgurLinkPreview: 'canecaImgurLinkPreview',
+                    imageType: 'canecaImageType'
+                }
+            };
+
+            const ids = idMap[section] || {};
+            
+            // Limpar formulário (se existir)
+            const urlInput = document.getElementById(ids.url);
+            const uploadInput = document.getElementById(ids.upload);
+            const imgurLinkInput = document.getElementById(ids.imgurLink);
+            const descInput = document.getElementById(ids.description);
+            const preview = document.getElementById(ids.preview);
+            const imgurLinkPreview = document.getElementById(ids.imgurLinkPreview);
+            const typeSelect = document.getElementById(ids.imageType);
+
+            if (urlInput) urlInput.value = '';
+            if (uploadInput) uploadInput.value = '';
+            if (imgurLinkInput) imgurLinkInput.value = '';
+            if (descInput) descInput.value = '';
+            if (preview) preview.innerHTML = '';
+            if (imgurLinkPreview) imgurLinkPreview.innerHTML = '';
+            if (typeSelect) {
+                typeSelect.value = 'imgur-upload';
+                toggleImageInput(section);
+            }
+            
+            // Fechar formulário
+            const formIdMap = {
+                'camisas': 'addCamisaForm',
+                'canecas': 'addCanecaForm'
+            };
+            const formId = formIdMap[section];
+            if (formId) {
+                const form = document.getElementById(formId);
+                if (form) {
+                    form.classList.remove('active');
+                }
+            }
+
+            // Recarregar galeria
+            loadGallery(section);
+
+            if (showAlert) {
+                alert('Imagem adicionada com sucesso!');
+            }
+        }
+
+        // Carregar galeria
+        function loadGallery(section) {
+            const gallery = document.getElementById(`${section}Gallery`);
+            if (!gallery) return;
+
+            const images = JSON.parse(localStorage.getItem(`${section}Images`) || '[]');
+            const isLoggedIn = localStorage.getItem('adminLoggedIn') === 'true';
+
+            if (images.length === 0) {
+                gallery.innerHTML = `
+                    <div class="empty-state" style="grid-column: 1 / -1;">
+                        <p>Nenhuma imagem adicionada ainda.</p>
+                        ${isLoggedIn ? '<p>Clique em "Adicionar Nova Imagem" para começar!</p>' : ''}
+                    </div>
+                `;
+                return;
+            }
+
+            gallery.innerHTML = images.map((image, index) => `
+                <div class="gallery-item">
+                    <img src="${image.url}" alt="${image.description || 'Imagem ' + (index + 1)}" 
+                         onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'300\' height=\'300\'%3E%3Crect fill=\'%23ddd\' width=\'300\' height=\'300\'/%3E%3Ctext fill=\'%23999\' font-family=\'sans-serif\' font-size=\'14\' dy=\'10.5\' font-weight=\'bold\' x=\'50%25\' y=\'50%25\' text-anchor=\'middle\'%3EImagem não encontrada%3C/text%3E%3C/svg%3E'">
+                    ${image.description ? `<div style="padding: 15px; background: white; border-top: 1px solid #eee;"><p style="margin: 0; color: #666; font-size: 0.9em;">${image.description}</p></div>` : ''}
+                    ${isLoggedIn ? `<button class="delete-btn" onclick="deleteImage('${section}', ${image.id})" title="Excluir">×</button>` : ''}
+                </div>
+            `).join('');
+        }
+
+        // Deletar imagem
+        function deleteImage(section, imageId) {
+            if (!confirm('Tem certeza que deseja excluir esta imagem?')) {
+                return;
+            }
+
+            const images = JSON.parse(localStorage.getItem(`${section}Images`) || '[]');
+            const filteredImages = images.filter(img => img.id !== imageId);
+            
+            localStorage.setItem(`${section}Images`, JSON.stringify(filteredImages));
+            loadGallery(section);
+        }
+
+        // Inicializar imagens padrão (se não existirem)
+        function initializeDefaultImages() {
+            // Imagens padrão de camisas
+            if (!localStorage.getItem('camisasImages')) {
+                const defaultCamisas = [
+                    {
+                        id: 1,
+                        url: 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'300\' height=\'300\'%3E%3Crect fill=\'%23fff\' width=\'300\' height=\'300\'/%3E%3Ctext fill=\'%23333\' font-family=\'Arial\' font-size=\'16\' dy=\'10.5\' font-weight=\'bold\' x=\'50%25\' y=\'50%25\' text-anchor=\'middle\'%3ECamisa com estampa de Jesus Médico%3C/text%3E%3C/svg%3E',
+                        description: 'Camisa com estampa de Jesus Médico'
+                    }
+                ];
+                localStorage.setItem('camisasImages', JSON.stringify(defaultCamisas));
+            }
+
+            // Imagens padrão de canecas
+            if (!localStorage.getItem('canecasImages')) {
+                const defaultCanecas = [
+                    {
+                        id: 1,
+                        url: 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'300\' height=\'300\'%3E%3Crect fill=\'%23fff\' width=\'300\' height=\'300\'/%3E%3Ctext fill=\'%23333\' font-family=\'Arial\' font-size=\'16\' dy=\'10.5\' font-weight=\'bold\' x=\'50%25\' y=\'50%25\' text-anchor=\'middle\'%3ECaneca com design floral e versículo%3C/text%3E%3C/svg%3E',
+                        description: 'Caneca com design floral e versículo bíblico'
+                    },
+                    {
+                        id: 2,
+                        url: 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'300\' height=\'300\'%3E%3Crect fill=\'%23fff\' width=\'300\' height=\'300\'/%3E%3Ctext fill=\'%23333\' font-family=\'Arial\' font-size=\'16\' dy=\'10.5\' font-weight=\'bold\' x=\'50%25\' y=\'50%25\' text-anchor=\'middle\'%3ECaneca personalizada com inicial M%3C/text%3E%3C/svg%3E',
+                        description: 'Caneca personalizada com inicial M para Michael'
+                    },
+                    {
+                        id: 3,
+                        url: 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'300\' height=\'300\'%3E%3Crect fill=\'%23fff\' width=\'300\' height=\'300\'/%3E%3Ctext fill=\'%23333\' font-family=\'Arial\' font-size=\'16\' dy=\'10.5\' font-weight=\'bold\' x=\'50%25\' y=\'50%25\' text-anchor=\'middle\'%3ECaneca com homenagem à Mãe%3C/text%3E%3C/svg%3E',
+                        description: 'Caneca com homenagem especial à Mãe'
+                    }
+                ];
+                localStorage.setItem('canecasImages', JSON.stringify(defaultCanecas));
+            }
+        }
+
+        // Inicializar
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeDefaultImages();
+            checkAuth();
+            
+            // Tentar carregar dados compartilhados da URL
+            tryLoadSharedData();
+            
+            loadGallery('camisas');
+            loadGallery('canecas');
+            
+            // Configurar drag and drop se estiver logado
+            if (localStorage.getItem('adminLoggedIn') === 'true') {
+                setupDragAndDrop('camisas');
+                setupDragAndDrop('canecas');
+            }
+        });
+
+        // Expor todas as funções globalmente
+        window.showSection = showSection;
+        window.openLoginModal = openLoginModal;
+        window.closeLoginModal = closeLoginModal;
+        window.handleLogin = handleLogin;
+        window.logout = logout;
+        window.toggleAddForm = toggleAddForm;
+        window.openImgurLinkForm = openImgurLinkForm;
+        window.toggleImageInput = toggleImageInput;
+        window.previewImage = previewImage;
+        window.previewImgurLink = previewImgurLink;
+        window.uploadToImgur = uploadToImgur;
+        window.addImage = addImage;
+        window.deleteImage = deleteImage;
+        window.exportData = exportData;
+        window.importData = importData;
+        window.setupDragAndDrop = setupDragAndDrop;
+        
+        // Garantir que as funções estejam disponíveis imediatamente
+        console.log('Funções expostas:', {
+            openImgurLinkForm: typeof window.openImgurLinkForm,
+            toggleAddForm: typeof window.toggleAddForm
+        });
+    </script>
+</body>
+</html>
+
