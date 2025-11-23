@@ -1,0 +1,43 @@
+{
+  "camisas": [
+    {
+      "url": "https://i.imgur.com/PmRq6G1.jpeg",
+      "description": "",
+      "id": 1763856755019,
+      "source": "imgur"
+    },
+    {
+      "url": "https://i.imgur.com/fra3mBc.jpeg",
+      "description": "",
+      "id": 1763856771003,
+      "source": "imgur"
+    }
+  ],
+  "canecas": [
+    {
+      "url": "https://i.imgur.com/maZTG5A.jpeg",
+      "description": "",
+      "id": 1763856779971,
+      "source": "imgur"
+    },
+    {
+      "url": "https://i.imgur.com/9BtWoXt.jpeg",
+      "description": "",
+      "id": 1763856788578,
+      "source": "imgur"
+    },
+    {
+      "url": "https://i.imgur.com/epeZidw.jpeg",
+      "description": "",
+      "id": 1763856797883,
+      "source": "imgur"
+    },
+    {
+      "url": "https://i.imgur.com/yiAQ4fo.jpeg",
+      "description": "",
+      "id": 1763856813538,
+      "source": "imgur"
+    }
+  ],
+  "lastUpdate": "2025-11-23T00:20:55.517Z"
+}
