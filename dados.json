@@ -1,15 +1,23 @@
 {
   "camisas": [
     {
-      "url": "https://i.imgur.com/PmRq6G1.jpeg",
-      "description": "",
-      "id": 1763856755019,
-      "source": "imgur"
-    },
-    {
       "url": "https://i.imgur.com/fra3mBc.jpeg",
       "description": "",
       "id": 1763856771003,
+      "source": "imgur"
+    }
+  ],
+  "camisas-dtf": [
+    {
+      "url": "https://i.imgur.com/vjZktmV.jpeg",
+      "description": "",
+      "id": 1764346511173,
+      "source": "imgur"
+    },
+    {
+      "url": "https://i.imgur.com/HF14jXs.jpeg",
+      "description": "",
+      "id": 1764346540744,
       "source": "imgur"
     }
   ],
@@ -39,5 +47,5 @@
       "source": "imgur"
     }
   ],
-  "lastUpdate": "2025-11-23T00:20:55.517Z"
+  "lastUpdate": "2025-11-28T16:15:57.638Z"
 }
